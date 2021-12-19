@@ -4,7 +4,6 @@ import javax.persistence.*
 
 @Entity(name = "customer")
 class CustomerModel(
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null,
