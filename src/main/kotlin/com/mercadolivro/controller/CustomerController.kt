@@ -15,7 +15,7 @@ class CustomerController(
 ) {
 
     @GetMapping
-    fun getAll(@RequestParam name: String?): List<CustomerModel> {
+    fun findAll(@RequestParam name: String?): List<CustomerModel> {
         return customerService.getAll(name)
     }
 
@@ -26,8 +26,8 @@ class CustomerController(
     }
 
     @GetMapping("/{id}")
-    fun getCustomer(@PathVariable id: Int): CustomerModel {
-        return customerService.getCustomer(id)
+    fun findById(@PathVariable id: Int): CustomerModel {
+        return customerService.findById(id)
     }
 
     @PutMapping("/{id}")
