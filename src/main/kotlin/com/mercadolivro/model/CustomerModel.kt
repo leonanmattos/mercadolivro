@@ -15,7 +15,7 @@ class CustomerModel(
     @Column(name = "email", length = 255, nullable = false, unique = true)
     var email: String,
 
-    @Column
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     var status: CustomerStatus
 

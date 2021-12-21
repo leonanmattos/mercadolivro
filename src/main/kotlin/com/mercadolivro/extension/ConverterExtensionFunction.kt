@@ -13,8 +13,13 @@ fun PostCustomerRequest.toCustomerModel(): CustomerModel {
     return CustomerModel(name = this.name, email = this.email, status = CustomerStatus.ATIVO)
 }
 
-fun PutCustomerRequest.toCustomerModel(id: Int): CustomerModel {
-    return CustomerModel(id = id, name = this.name, email = this.email, status = CustomerStatus.ATIVO)
+fun PutCustomerRequest.toCustomerModel(previousCustomer: CustomerModel): CustomerModel {
+    return CustomerModel(
+        id = previousCustomer.id,
+        name = this.name,
+        email = this.email,
+        status = previousCustomer.status
+    )
 }
 
 fun PostBookRequest.toBookModel(customer: CustomerModel): BookModel {
