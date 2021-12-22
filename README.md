@@ -9,4 +9,8 @@ Mysql 8.0.23
 
 JDK 11
 
+## Swagger
+
+http://localhost:8080/swagger-ui/index.html
+
 

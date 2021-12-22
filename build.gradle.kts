@@ -24,6 +24,9 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.flywaydb:flyway-core:8.1.0")
+	implementation("io.springfox:springfox-boot-starter:3.0.0")
+
+
 
 	runtimeOnly("mysql:mysql-connector-java")
 
