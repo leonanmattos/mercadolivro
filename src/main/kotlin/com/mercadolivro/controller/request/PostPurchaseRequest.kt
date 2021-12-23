@@ -11,6 +11,7 @@ data class PostPurchaseRequest(
     @field:Positive
     val customerId: Int,
 
+    @JsonAlias("book_ids")
     @field:NotNull(message = "Books is required")
     val bookIds: Set<Int>
 )

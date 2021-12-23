@@ -9,6 +9,7 @@ import com.mercadolivro.repository.BookRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import java.awt.print.Book
 
 @Service
 class BookService(
@@ -52,5 +53,9 @@ class BookService(
         }
 
         bookRepository.saveAll(books)
+    }
+
+    fun findAllByIds(bookIds: Set<Int>): List<BookModel> {
+        return bookRepository.findAllById(bookIds).toList()
     }
 }
