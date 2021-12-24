@@ -6,12 +6,14 @@ import com.mercadolivro.enums.ProfileRoleEnum
 import com.mercadolivro.exception.NotFoundException
 import com.mercadolivro.model.CustomerModel
 import com.mercadolivro.repository.CustomerRepository
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class CustomerService(
-    val customerRepository: CustomerRepository,
-    val bookService: BookService
+    private val customerRepository: CustomerRepository,
+    private val bookService: BookService,
+    private val bCrypt: BCryptPasswordEncoder
 ) {
 
     fun findAll(name: String?): List<CustomerModel> {
@@ -23,7 +25,8 @@ class CustomerService(
 
     fun create(customer: CustomerModel) {
         val newCustomer = customer.copy(
-            roles = setOf(ProfileRoleEnum.CUSTOMER)
+            roles = setOf(ProfileRoleEnum.CUSTOMER),
+            password = bCrypt.encode(customer.password),
         )
         customerRepository.save(newCustomer)
     }
