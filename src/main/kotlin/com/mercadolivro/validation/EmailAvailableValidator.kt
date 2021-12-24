@@ -1,6 +1,7 @@
 package com.mercadolivro.validation
 
 import com.mercadolivro.service.CustomerService
+import com.mercadolivro.validation.interfaces.EmailAvailable
 import javax.validation.ConstraintValidator
 import javax.validation.ConstraintValidatorContext
 
