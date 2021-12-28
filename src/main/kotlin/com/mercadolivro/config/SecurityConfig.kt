@@ -33,8 +33,11 @@ class SecurityConfig(
 ) : WebSecurityConfigurerAdapter() {
 
     private val PUBLIC_POST_MATCHERS = arrayOf(
-        "/customer",
-        "/swagger-ui/**"
+        "/customers"
+    )
+
+    private val PUBLIC_GET_MATCHERS = arrayOf(
+        "/books"
     )
 
     private val ADMIN_MATCHERS = arrayOf(
@@ -46,6 +49,7 @@ class SecurityConfig(
         http.authorizeRequests()
             .antMatchers("/swagger-ui/**").anonymous()
             .antMatchers(HttpMethod.POST, *PUBLIC_POST_MATCHERS).permitAll()
+            .antMatchers(HttpMethod.GET, *PUBLIC_GET_MATCHERS).permitAll()
             .antMatchers(*ADMIN_MATCHERS).hasAuthority(RoleEnum.ADMIN.description)
             .anyRequest().authenticated()
         http.addFilter(AuthenticationFilter(authenticationManager(), customerRepository, jwtUtil))
@@ -74,7 +78,7 @@ class SecurityConfig(
         val source = UrlBasedCorsConfigurationSource()
         val config = CorsConfiguration()
         config.allowCredentials = true
-        config.addAllowedOrigin("*")
+        config.addAllowedOriginPattern("*")
         config.addAllowedHeader("*")
         config.addAllowedMethod("*")
         source.registerCorsConfiguration("/**", config)
