@@ -13,4 +13,8 @@ JDK 11
 
 http://localhost:8080/swagger-ui/index.html
 
+# Enviroments
+VM Options:
+-Dspring.profiles.active=dev
+
 
