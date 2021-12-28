@@ -6,8 +6,10 @@ import com.mercadolivro.controller.response.CustomerResponse
 import com.mercadolivro.extension.toCustomerModel
 import com.mercadolivro.extension.toResponse
 import com.mercadolivro.model.CustomerModel
+import com.mercadolivro.security.UserCanOnlyAccessTheirOwnResponse
 import com.mercadolivro.service.CustomerService
 import org.springframework.http.HttpStatus
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
@@ -29,12 +31,14 @@ class CustomerController(
     }
 
     @GetMapping("/{id}")
+    @UserCanOnlyAccessTheirOwnResponse
     fun findById(@PathVariable id: Int): CustomerResponse {
         return customerService.findById(id).toResponse()
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @UserCanOnlyAccessTheirOwnResponse
     fun update(@PathVariable id: Int, @Valid @RequestBody customer: PutCustomerRequest) {
         val previousCustomer = customerService.findById(id)
         customerService.update(customer.toCustomerModel(previousCustomer))

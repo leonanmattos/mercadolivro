@@ -8,7 +8,7 @@ spring:
     password: mercadolivro
   jackson:
     default-property-inclusion: non_null
-  jwt:
-    secret: d0d2be1e-7d2d-4861-91f7-4083600bcae3
-    expiration: 999999
+jwt:
+  secret: d0d2be1e-7d2d-4861-91f7-4083600bcae3
+  expiration: 999999
 

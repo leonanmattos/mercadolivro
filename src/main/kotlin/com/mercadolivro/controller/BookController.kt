@@ -5,6 +5,7 @@ import com.mercadolivro.controller.request.PutBookRequest
 import com.mercadolivro.controller.response.BookResponse
 import com.mercadolivro.extension.toBookModel
 import com.mercadolivro.extension.toResponse
+import com.mercadolivro.security.UserCanOnlyAccessTheirOwnResponse
 import com.mercadolivro.service.BookService
 import com.mercadolivro.service.CustomerService
 import org.springframework.data.domain.Page
@@ -38,6 +39,7 @@ class BookController(
     }
 
     @GetMapping("/{id}")
+    @UserCanOnlyAccessTheirOwnResponse
     fun findById(@PathVariable id: Int): BookResponse {
         return bookService.findById(id).toResponse()
     }
@@ -50,6 +52,7 @@ class BookController(
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @UserCanOnlyAccessTheirOwnResponse
     fun update(@PathVariable id: Int, @Valid @RequestBody book: PutBookRequest) {
         val previousBook = bookService.findById(id)
         bookService.update(book.toBookModel(previousBook))
