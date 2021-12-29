@@ -6,6 +6,7 @@ plugins {
 	kotlin("jvm") version "1.6.0"
 	kotlin("plugin.spring") version "1.6.0"
 	kotlin("plugin.jpa") version "1.6.0"
+	jacoco
 }
 
 group = "com.mercadolivro"
@@ -27,12 +28,15 @@ dependencies {
 	implementation("org.flywaydb:flyway-core:8.1.0")
 	implementation("io.springfox:springfox-boot-starter:3.0.0")
 	implementation("io.jsonwebtoken:jjwt:0.9.1")
+	implementation("org.junit.jupiter:junit-jupiter:5.7.0")
 
 
 
 	runtimeOnly("mysql:mysql-connector-java")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("io.mockk:mockk:1.12.1")
+
 }
 
 tasks.withType<KotlinCompile> {
