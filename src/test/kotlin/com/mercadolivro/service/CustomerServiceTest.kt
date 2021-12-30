@@ -2,9 +2,8 @@ package com.mercadolivro.service
 
 import com.mercadolivro.enums.CustomerStatus
 import com.mercadolivro.enums.ErrorEnum
-import com.mercadolivro.enums.RoleEnum
 import com.mercadolivro.exception.NotFoundException
-import com.mercadolivro.model.CustomerModel
+import com.mercadolivro.helper.buildCustomer
 import com.mercadolivro.repository.CustomerRepository
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
@@ -14,7 +13,6 @@ import io.mockk.junit5.MockKExtension
 import io.mockk.just
 import io.mockk.runs
 import io.mockk.verify
-import org.hibernate.annotations.NotFound
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -196,18 +194,4 @@ internal class CustomerServiceTest {
         Assertions.assertFalse(emailAvailable)
         verify(exactly = 1) { customerRepository.existsByEmail(email) }
     }
-
-    private fun buildCustomer(
-        id: Int? = null,
-        name: String = "Customer name",
-        email: String = "${UUID.randomUUID()}@email.com.br",
-        password: String = "password"
-    ) = CustomerModel(
-        id = id,
-        name = name,
-        email = email,
-        status = CustomerStatus.ATIVO,
-        password = password,
-        roles = setOf(RoleEnum.CUSTOMER)
-    )
 }
