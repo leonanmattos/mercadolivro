@@ -1,10 +1,12 @@
 package com.mercadolivro.helper
 
+import com.mercadolivro.enums.BookStatus
 import com.mercadolivro.enums.CustomerStatus
 import com.mercadolivro.enums.RoleEnum
 import com.mercadolivro.model.BookModel
 import com.mercadolivro.model.CustomerModel
 import com.mercadolivro.model.PurchaseModel
+import java.awt.print.Book
 import java.math.BigDecimal
 import java.util.*
 
@@ -34,4 +36,19 @@ fun buildPurchase(
     books = books,
     nfe = nfe,
     price = price
+)
+
+fun buildBook(
+    id: Int? = null,
+    name: String = UUID.randomUUID().toString(),
+    status: BookStatus = BookStatus.ATIVO,
+    price: BigDecimal = BigDecimal.TEN,
+    customer: CustomerModel = buildCustomer(),
+) = BookModel(
+    id = id,
+    name = name,
+    status = status,
+    price = price,
+    customer = customer
+
 )
